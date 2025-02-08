@@ -1,25 +1,32 @@
 using CholitosAppFront.Configuration;
-using CholitosAppFront.Configuration.Interfaces;
-using CholitosAppFront.Repository;
-using CholitosAppFront.Repository.Interfaces;
+using CholitosAppFront.Core.Interfaces;
+using CholitosAppFront.Core.UseCases;
+using CholitosAppFront.Core.UseCases.Interfaces;
+using CholitosAppFront.Infrastructure.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
-#region Configuraciones #1 contenedor de servicios e inyeccion de dependencias.
+#region Contenedor de servicios e inyeccion de dependencias.
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddRazorRuntimeCompilation();
 
 // Get configuration of appsettings.json
 IConfiguration configuration = builder.Configuration;
 
 Properties properties = new Properties(configuration);
 
-// Add properties service to container of dependency injection
+// Other services
 builder.Services.AddScoped<IProperties, Properties>();
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
-// Add repository service to container of dependency injection
-builder.Services.AddScoped<ITestConnection, TestConnection>();
+// Repository services
+builder.Services.AddScoped<IConnectionManagerRepository, ConnectionManagerRepository>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+
+// UseCases services
+builder.Services.AddScoped<IClientUseCase, ClientUseCase>();
 
 #endregion
 

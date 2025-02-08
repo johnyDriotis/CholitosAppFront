@@ -1,5 +1,4 @@
-using CholitosAppFront.Models;
-using CholitosAppFront.Repository.Interfaces;
+using CholitosAppFront.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,21 +6,18 @@ namespace CholitosAppFront.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
+        private readonly IConnectionManagerRepository _connectionManagerRepository;
 
-        private readonly ITestConnection _connection;
-
-        public HomeController(/*ILogger<HomeController> logger*/ ITestConnection connection)
+        public HomeController(IConnectionManagerRepository connectionManagerRepository)
         {
-            //_logger = logger;
-            this._connection = connection;
+            this._connectionManagerRepository = connectionManagerRepository ?? throw new ArgumentNullException(nameof(connectionManagerRepository));
         }
 
         public IActionResult Index()
         {
             string conexionExitosa = "";
 
-            conexionExitosa = _connection.ConnectToDatabase();
+            conexionExitosa = _connectionManagerRepository.ConnectToDatabaseWithMessage();
 
             ViewData["MsjConexion"] = conexionExitosa; 
 
@@ -31,12 +27,6 @@ namespace CholitosAppFront.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

@@ -1,0 +1,132 @@
+﻿@model List<ClientDto>
+
+@{
+    ViewData["Title"] = "Pagina de clientes";
+}
+
+@section Styles{
+
+    <!-- JQuery DataTable Css -->
+    <link href="~/template/jquery-datatable/css/dataTables.bootstrap.css" rel="stylesheet">
+
+};
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            
+        </div>
+        <!-- #END# Basic Examples -->
+        <!-- Exportable Table -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                            <button type="button" class="btn btn-primary waves-effect">
+                            <i class="material-icons">library_add</i>
+                                <span>Agregar mensualidad</span>
+                            </button>
+                        <button type="button" class="btn btn-danger waves-effect">
+                            <i class="material-icons">note_add</i>
+                            <span>Agregar Quincena</span>
+                        </button>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another action</a></li>
+                                    <li><a href="javascript:void(0);">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <thead>
+                                    <tr>
+                                        @* <th>Cliente</th> *@
+                                        <th>Codigo_gimnasio</th>
+                                        <th>Nombre</th>
+                                        @* <th>Primer_nombre</th>
+                                        <th>Segundo_nombre</th>
+                                        <th>Primer_apellido</th>
+                                        <th>Segundo_apellido</th>
+                                        <th>Apellido_casada</th> *@
+                                        <th>Fecha_pago</th>
+                                        <th>Fecha_inicio</th>
+                                        <th>Fecha_fin</th>
+                                        <th>Firma</th>
+                                        <th>Modalidad</th>
+                                    </tr>
+                                </thead>
+                                @* <tfoot>
+                                    <tr>
+                                         <th>Cliente</th> 
+                                        <th>Codigo_gimnasio</th>
+                                        <th>Nombre</th>
+                                         <th>Primer_nombre</th>
+                                        <th>Segundo_nombre</th>
+                                        <th>Primer_apellido</th>
+                                        <th>Segundo_apellido</th>
+                                        <th>Apellido_casada</th> 
+                                        <th>Fecha_pago</th>
+                                        <th>Fecha_inicio</th>
+                                        <th>Fecha_fin</th>
+                                        <th>Firma</th>
+                                        <th>Modalidad</th>
+                                    </tr>
+                                </tfoot> *@
+                                <tbody>
+                                    @foreach (var cliente in Model)
+                                    {
+                                        string modalidad = cliente.TipoModalidadGym.Equals("M") ? "Mensualidad" : "Quincena";
+                                        string firma = cliente.FirmaCliente.Equals("S") ? "Si" : "No";
+                                            
+                                        <tr>
+                                            @* <td>@cliente.CodigoCliente</td> *@
+                                            <td>@cliente.CodigoGimnasio</td>
+                                            <td>@cliente.PrimerNombre @cliente.SegundoNombre @cliente.PrimerApellido @cliente.SegundoApellido @cliente.ApellidoCasada</td>
+                                            @* <td>@cliente.PrimerNombre</td>
+                                            <td>@cliente.SegundoNombre</td>
+                                            <td>@cliente.PrimerApellido</td>
+                                            <td>@cliente.SegundoApellido</td>
+                                            <td>@cliente.ApellidoCasada</td> *@
+                                            <td>@cliente.FechaPagoModalidad.Substring(3,2)-@cliente.FechaPagoModalidad.Substring(0,2)-@cliente.FechaPagoModalidad.Substring(6,4)</td>
+                                            <td>@cliente.FechaInicioModalidad.Substring(3, 2)-@cliente.FechaInicioModalidad.Substring(0, 2)-@cliente.FechaInicioModalidad.Substring(6, 4)</td>
+                                            <td>@cliente.FechaFinModalidad.Substring(3, 2)-@cliente.FechaFinModalidad.Substring(0, 2)-@cliente.FechaFinModalidad.Substring(6, 4)</td>
+                                            <td>@firma</td>
+                                            <td>@modalidad</td>
+                                        </tr>
+                                    }
+
+                                                                      
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Exportable Table -->
+    </div>
+</section>
+
+@section Scripts{
+
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="/template/jquery-datatable/js/jquery.dataTables.js"></script>
+    <script src="/template/jquery-datatable/js/dataTables.bootstrap.js"></script>
+    <script src="/template/jquery-datatable/js/dataTables.buttons.min.js"></script>
+    <script src="/template/jquery-datatable/js/buttons.flash.min.js"></script>
+    <script src="/template/jquery-datatable/js/jszip.min.js"></script>
+    <script src="/template/jquery-datatable/js/pdfmake.min.js"></script>
+    <script src="/template/jquery-datatable/js/vfs_fonts.js"></script>
+    <script src="/template/jquery-datatable/js/buttons.html5.min.js"></script>
+    <script src="/template/jquery-datatable/js/buttons.print.min.js"></script>
+
+    <script src="/template/custom/js/jquery-datatable.js"></script>
+};

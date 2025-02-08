@@ -1,4 +1,4 @@
-﻿using CholitosAppFront.Configuration.Interfaces;
+﻿using CholitosAppFront.Core.Interfaces;
 
 namespace CholitosAppFront.Configuration
 {

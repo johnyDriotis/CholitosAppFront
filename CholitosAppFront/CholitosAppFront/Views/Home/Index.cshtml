@@ -3,13 +3,20 @@
     string msjConexion = ViewData["MsjConexion"].ToString() ?? "";
 }
 
+@section Styles{
+
+    <!-- Morris Chart Css -->
+    <link href="/template/morrisjs/css/morris.css" rel="stylesheet" />
+
+};
+
 @{
     if (!msjConexion.Contains("Error"))
     {
         <section class="content">
             <div class="container-fluid">
                 <div class="block-header">
-                    <h2>DASHBOARD: @msjConexion</h2>
+                    <h2>DASHBOARD</h2>
                 </div>
 
                 <!-- Widgets -->
@@ -102,9 +109,9 @@
                         <div class="card">
                             <div class="body bg-pink">
                                 <div class="sparkline" data-type="line" data-spot-Radius="4" data-highlight-Spot-Color="rgb(233, 30, 99)" data-highlight-Line-Color="#fff"
-                                data-min-Spot-Color="rgb(255,255,255)" data-max-Spot-Color="rgb(255,255,255)" data-spot-Color="rgb(255,255,255)"
-                                data-offset="90" data-width="100%" data-height="92px" data-line-Width="2" data-line-Color="rgba(255,255,255,0.7)"
-                                data-fill-Color="rgba(0, 188, 212, 0)">
+                                     data-min-Spot-Color="rgb(255,255,255)" data-max-Spot-Color="rgb(255,255,255)" data-spot-Color="rgb(255,255,255)"
+                                     data-offset="90" data-width="100%" data-height="92px" data-line-Width="2" data-line-Color="rgba(255,255,255,0.7)"
+                                     data-fill-Color="rgba(0, 188, 212, 0)">
                                     12,10,9,6,5,6,10,5,7,5,12,13,7,12,11
                                 </div>
                                 <ul class="dashboard-stat-list">
@@ -329,3 +336,26 @@
     }
 }
 
+@section Scripts{
+
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="/template/jquery-countto/js/jquery.countTo.js"></script>
+
+    <!-- Morris Plugin Js -->
+    <script src="/template/raphael/js/raphael.min.js"></script>
+    <script src="/template/morrisjs/js/morris.js"></script>
+
+    <!-- Flot Charts Plugin Js -->
+    <script src="/template/flot-charts/js/jquery.flot.js"></script>
+    <script src="/template/flot-charts/js/jquery.flot.resize.js"></script>
+    <script src="/template/flot-charts/js/jquery.flot.pie.js"></script>
+    <script src="/template/flot-charts/js/jquery.flot.categories.js"></script>
+    <script src="/template/flot-charts/js/jquery.flot.time.js"></script>
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script src="/template/jquery-sparkline/js/jquery.sparkline.js"></script>
+
+    <!-- Custom Js -->
+    <script src="/template/custom/js/index.js"></script>
+
+}
